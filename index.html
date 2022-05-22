@@ -8,6 +8,7 @@
     <title>Code Quiz</title>
 </head>
 <body>
+
     <header>
         <div class="title">Quiz Game</div>
         <button id="start-btn">Start</button>
@@ -15,10 +16,10 @@
 
     <main>
         <section id="question-section">
-            <div id="timer">
-                Time Remaining:
-            </div>
-            <div id="question"></div>
+            <div id="timer"><span>Time Remaining:</span></div>
+            <div id="questions"></div>
+            <div id="choices-list"></div>
+            <div id="question-result"></div>
         </section>
 
         <section id="score-section">
@@ -29,8 +30,8 @@
                 <div id="high-score-div"></div>
             </div>
         </section>
-
     </main>
+
 <script src="script.js"></script>
 </body>
 </html>
