@@ -4,6 +4,8 @@ var questionsEl = document.getElementById("questions");
 var choicesListEl = document.getElementById("choices-list");
 var questionResultEl = document.getElementById("question-result");
 var submitBtn = document.getElementById("submit-btn");
+var highScoreEl = document.getElementById("high-score-div");
+var userInitials = document.getElementById("user-initials");
 var time = 90;
 var timeInterval;
 var intervalID;
@@ -36,8 +38,18 @@ var questions = [
         answer: "objects"
     },
    ];
+
+   function endQuiz() {
+    clearInterval(intervalID);
+    timerEl.textContent = "";
+    // highScoreEl.textContent = "Quiz finished! You scored: " + userScore + "points!";
+    console.log(userScore);
+}
    
 function renderQuestion() {
+    if (time === 0 || questionsIndex === questions.length) {
+        endQuiz();
+    }
     questionsEl.textContent = questions[questionsIndex].question;
     choicesListEl.textContent = "";
     questionResultEl.textContent = "";
@@ -48,6 +60,41 @@ function renderQuestion() {
         var choicesList = document.createElement("li");
         choicesList.textContent = choices[i];
         choicesListEl.append(choicesList);
+    }
+}
+
+// function finishQuiz() {
+//     if (time === 0) {
+//         endQuiz();
+//     }
+// }
+
+function renderHighScores() {
+    var highScores = [];
+    var initials = userInitials.value.trim();
+    var user = {
+        initials: initials,
+        score: userScore
+    }
+
+    highScores.push(user);
+    highScores.sort(function(a, b) {
+        return b.highScores - a.highScores;
+    });
+    localStorage.setItem("score", JSON.stringify(highScores));
+    var usersHighScore = JSON.parse(localStorage.getItem("score"));
+    console.log(usersHighScore);
+
+    highScoreEl.textContent = initials + " you scored " + usersHighScore + "points.";
+}
+submitBtn.addEventListener("click", renderHighScores);
+
+function renderNextQuestion() {
+    questionsIndex++;
+    if (questionsIndex === questions.length) {
+        endQuiz();
+    } else {
+        renderQuestion();
     }
 }
 
@@ -65,7 +112,7 @@ function checkAnswer(event) {
             time-=2;
         }
     }
-    setTimeout(renderNextQuestion, 2000)
+    setTimeout(renderNextQuestion, 500);
 }
 choicesListEl.addEventListener("click", checkAnswer);
 
@@ -75,6 +122,7 @@ function startQuiz() {
         time--;
         if (time === 0) {
             clearInterval(timeInterval);
+            endQuiz();
         }
     }, 1000);
     console.log("Start button clicked!");
