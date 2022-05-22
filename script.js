@@ -1,8 +1,8 @@
 var startBtn = document.getElementById("start-btn");
 var timerEl = document.getElementById("timer");
 var questionsEl = document.getElementById("questions");
-var choicesEl = document.getElementById("choices-list");
-var questionResult = document.getElementById("question-result");
+var choicesListEl = document.getElementById("choices-list");
+var questionResultEl = document.getElementById("question-result");
 var submitBtn = document.getElementById("submit-btn");
 var time = 90;
 var timeInterval;
@@ -39,6 +39,15 @@ var questions = [
 
    function renderQuestion() {
     questionsEl.textContent = questions[questionsIndex].question;
+    choicesListEl.textContent = "";
+    questionResultEl.textContent = "";
+    var choices = questions[questionsIndex].choices;
+
+    for (var i = 0; i < choices.length; i++) {
+        var choicesList = document.createElement("li");
+        choicesList.textContent = choices[i];
+        choicesListEl.append(choicesList);
+    }
    }
 
 function startGame() {
