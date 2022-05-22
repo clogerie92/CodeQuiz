@@ -3,6 +3,7 @@ var timerEl = document.getElementById("timer");
 var questionsEl = document.getElementById("questions");
 var choicesListEl = document.getElementById("choices-list");
 var questionResultEl = document.getElementById("question-result");
+var userScoreDiv = document.getElementById("user-score");
 var submitBtn = document.getElementById("submit-btn");
 var highScoreEl = document.getElementById("high-score-div");
 var userInitials = document.getElementById("user-initials");
@@ -41,13 +42,14 @@ var questions = [
 
    function endQuiz() {
     clearInterval(intervalID);
-    timerEl.textContent = "";
+    // timerEl.textContent = "";
     // highScoreEl.textContent = "Quiz finished! You scored: " + userScore + "points!";
     console.log(userScore);
+    renderHighScores();
 }
    
 function renderQuestion() {
-    if (time === 0 || questionsIndex === questions.length) {
+    if (time === 0) {
         endQuiz();
     }
     questionsEl.textContent = questions[questionsIndex].question;
@@ -63,13 +65,14 @@ function renderQuestion() {
     }
 }
 
-// function finishQuiz() {
-//     if (time === 0) {
-//         endQuiz();
-//     }
-// }
+function finishQuiz() {
+    if (time === 0) {
+        endQuiz();
+    }
+}
 
 function renderHighScores() {
+    userScoreDiv.classList.remove("hide");
     var highScores = [];
     var initials = userInitials.value.trim();
     var user = {
