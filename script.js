@@ -36,11 +36,12 @@ var questions = [
         answer: "objects"
     },
    ];
-
-   function renderQuestion() {
+   
+function renderQuestion() {
     questionsEl.textContent = questions[questionsIndex].question;
     choicesListEl.textContent = "";
     questionResultEl.textContent = "";
+
     var choices = questions[questionsIndex].choices;
 
     for (var i = 0; i < choices.length; i++) {
@@ -48,9 +49,27 @@ var questions = [
         choicesList.textContent = choices[i];
         choicesListEl.append(choicesList);
     }
-   }
+}
 
-function startGame() {
+function checkAnswer(event) {
+    clearInterval(intervalID);
+
+    var target = event.target;
+    if (target.matches("li")) {
+        var usersAnswer = target.textContent;
+        if (usersAnswer === questions[questionsIndex].answer) {
+            questionResultEl.textContent = "Correct!";
+            userScore++;
+        } else {
+            questionResultEl.textContent = "Wrong!";
+            time-=2;
+        }
+    }
+    setTimeout(renderNextQuestion, 2000)
+}
+choicesListEl.addEventListener("click", checkAnswer);
+
+function startQuiz() {
     timeInterval = setInterval(function() {
         timerEl.textContent = "Time remaining: " + time;
         time--;
@@ -61,7 +80,7 @@ function startGame() {
     console.log("Start button clicked!");
     renderQuestion();    
 }
-startBtn.addEventListener("click", startGame);
+startBtn.addEventListener("click", startQuiz);
 
 
 
