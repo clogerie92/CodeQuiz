@@ -3,13 +3,14 @@ var timerEl = document.getElementById("timer");
 var questionsEl = document.getElementById("questions");
 var choicesListEl = document.getElementById("choices-list");
 var questionResultEl = document.getElementById("question-result");
+var questionsDiv = document.getElementById("questions-div");
 var userScoreDiv = document.getElementById("user-score");
 var submitBtn = document.getElementById("submit-btn");
 var highScoreEl = document.getElementById("high-score-div");
 var userInitials = document.getElementById("user-initials");
 var time = 90;
 var timeInterval;
-var intervalID;
+// var intervalID;
 var questionsIndex = 0;
 var userScore = 0;
 var questions = [
@@ -41,11 +42,14 @@ var questions = [
    ];
 
    function endQuiz() {
-    clearInterval(intervalID);
-    // timerEl.textContent = "";
+    clearInterval(timeInterval);
+    timerEl.textContent = "";
     // highScoreEl.textContent = "Quiz finished! You scored: " + userScore + "points!";
     console.log(userScore);
-    renderHighScores();
+    // renderHighScores();
+    questionsDiv.classList.add("hide");
+    userScoreDiv.classList.remove("hide");
+    
 }
    
 function renderQuestion() {
@@ -72,23 +76,25 @@ function finishQuiz() {
 }
 
 function renderHighScores() {
-    userScoreDiv.classList.remove("hide");
+    
     var highScores = [];
     var initials = userInitials.value.trim();
     var user = {
         initials: initials,
         score: userScore
     }
+    var usersHighScore = JSON.parse(localStorage.getItem("score"));
 
     highScores.push(user);
     highScores.sort(function(a, b) {
         return b.highScores - a.highScores;
     });
+    console.log(highScores[0]);
     localStorage.setItem("score", JSON.stringify(highScores));
-    var usersHighScore = JSON.parse(localStorage.getItem("score"));
+    
     console.log(usersHighScore);
 
-    highScoreEl.textContent = initials + " you scored " + usersHighScore + "points.";
+    highScoreEl.textContent = user.initials + " you scored " + usersHighScore + "points.";
 }
 submitBtn.addEventListener("click", renderHighScores);
 
@@ -102,7 +108,7 @@ function renderNextQuestion() {
 }
 
 function checkAnswer(event) {
-    clearInterval(intervalID);
+    // clearInterval(timeInterval);
 
     var target = event.target;
     if (target.matches("li")) {
@@ -128,6 +134,8 @@ function startQuiz() {
             endQuiz();
         }
     }, 1000);
+    questionsDiv.classList.remove("hide");
+
     console.log("Start button clicked!");
     renderQuestion();    
 }
