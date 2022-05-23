@@ -10,7 +10,7 @@ var submitBtn = document.getElementById("submit-btn");
 var userScoreEl = document.getElementById("score-div");
 var userInitialsEl = document.getElementById("user-initials");
 var scoresList = document.getElementById("scores-list");
-var highScoresSection = document.getElementById("user-high-scores");
+var highScoresPage = document.getElementById("high-scores-page");
 var highScoreDiv = document.getElementById("high-scores");
 var time = 90;
 var timeInterval;
@@ -131,6 +131,16 @@ function checkAnswer(event) {
 }
 choicesListEl.addEventListener("click", checkAnswer);
 
+function showHighScores () {
+    highScoreDiv.classList.remove("hide");
+    for (var i = 0; i < highScores.length; i++) {
+        var liEl = document.createElement("li");
+        liEl.textContent= JSON.stringify(highScores[i]);
+        scoresList.append(liEl);
+    }
+}
+highScoresPage.addEventListener("click", showHighScores);
+
 function startQuiz() {
     time = 90;
     questionsIndex = 0;
@@ -147,16 +157,8 @@ function startQuiz() {
 
     console.log("Start button clicked!");
     userScoreDiv.classList.add("hide");
+    highScoreDiv.classList.add("hide");
     renderQuestion();    
-}
-
-function showHighScores () {
-    highScoreDiv.classList.remove("hide");
-    for (var i = 0; i < highScores.length; i++) {
-        var liEl = document.createElement("li");
-        liEl.textContent= JSON.stringify(highScores[i]);
-        scoresList.append(liEl);
-    }
 }
 startBtn.addEventListener("click", startQuiz);
 
