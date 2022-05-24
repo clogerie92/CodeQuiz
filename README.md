@@ -25,6 +25,5 @@ https://clogerie92.github.io/CodeQuiz/
 
 ![A user clicks through an interactive coding quiz, then enters initials to save the high score.](./images/quiz.png)
 
-## Contributer
-Carl Logerie
-Contact: carl.logerie92@gmail.com
+## Contributer: Carl Logerie
+Email: carl.logerie92@gmail.com
