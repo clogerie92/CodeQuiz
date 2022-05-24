@@ -15,7 +15,6 @@ var highScoresPage = document.getElementById("high-scores-page");
 var highScoreDiv = document.getElementById("high-scores");
 var time = 90;
 var timeInterval;
-// var intervalID;
 var questionsIndex = 0;
 var userScore = 0;
 var questions = [
@@ -46,8 +45,8 @@ var questions = [
     },
    ];
 
-   // function to start the quiz
-   function startQuiz() {
+// function to start the quiz and timer
+function startQuiz() {
     time = 90;
     questionsIndex = 0;
     userScore = 0;
@@ -67,7 +66,7 @@ var questions = [
     renderQuestion();    
 }
 
-// function to render questions to the screen
+// function to render questions
 function renderQuestion() {
     if (time === 0) {
         endQuiz();
@@ -87,13 +86,17 @@ function renderQuestion() {
 
 // function to check the answer
 function checkAnswer(event) {
+    // stores where the user clicked in target varibale
     var target = event.target;
+    // checks if the user clicked on the right answer
     if (target.matches("li")) {
         var usersAnswer = target.textContent;
         if (usersAnswer === questions[questionsIndex].answer) {
             questionResultEl.textContent = "Correct!";
-            userScore++;
-        } else {
+            userScore++; 
+        }
+        // subtract 2s from time if answer is wrong 
+        else {
             questionResultEl.textContent = "Wrong!";
             time-=2;
         }
@@ -105,6 +108,7 @@ function checkAnswer(event) {
 function renderNextQuestion() {
     questionsIndex++;
     console.log(questionsIndex);
+    // stops the quiz if there are no more questions, otherwise render the next question
     if (questionsIndex >= questions.length) {
         endQuiz();
     } else {
@@ -134,6 +138,7 @@ function showUserScore() {
 // function to render all the users and their scores
 function showHighScores () {
     highScoreDiv.classList.remove("hide");
+    // loops through highscores and renders a list with the user's initials and scores
     for (var i = 0; i < highScores.length; i++) {
         var liEl = document.createElement("li");
         console.log(typeof highScores);
@@ -145,39 +150,22 @@ function showHighScores () {
     }
 }
 
-   // function to stop the quiz
+// function to stop the quiz
 function endQuiz() {
     clearInterval(timeInterval);
     timerEl.textContent = "";
-    // highScoreEl.textContent = "Quiz finished! You scored: " + userScore + "points!";
     console.log(userScore);
-    // renderHighScores();
+
     questionsDiv.classList.add("hide");
     userScoreDiv.classList.remove("hide");    
 }
 
-// function finishQuiz() {
-//     if (time === 0) {
-//         endQuiz();
-//     }
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
+// event listeners to execute functions
 startBtn.addEventListener("click", startQuiz);
+choicesListEl.addEventListener("click", checkAnswer);
 submitBtn.addEventListener("click", showUserScore);
 highScoresPage.addEventListener("click", showHighScores);
-choicesListEl.addEventListener("click", checkAnswer);
+
 
 
 
