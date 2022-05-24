@@ -1,6 +1,6 @@
 * {
-    font-family: sans-serif;
-    /* box-sizing: border-box; */
+    font-family: 'Abel', sans-serif;
+    font-family: 'Montserrat', sans-serif;  
 }
 
 body {
@@ -21,7 +21,9 @@ main {
 header {
     padding: 40px;
     text-align: center;
-    /* border: solid red; */
+    border: solid #3CA55C;  /* fallback for old browsers */
+    border: solid -webkit-linear-gradient(to bottom, #B5AC49, #3CA55C);  /* Chrome 10-25, Safari 5.1-6 */
+    border: solid linear-gradient(to bottom, #B5AC49, #3CA55C); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     border-radius: 8px;
     display: block;
     background: #f12711;  /* fallback for old browsers */
@@ -35,8 +37,13 @@ header {
     flex: 0 auto;
     padding: 8px;
     margin-top: 50px;
-    border: solid blue;
+    border: solid #3CA55C;  /* fallback for old browsers */
+    border: solid -webkit-linear-gradient(to bottom, #B5AC49, #3CA55C);  /* Chrome 10-25, Safari 5.1-6 */
+    border: solid linear-gradient(to bottom, #B5AC49, #3CA55C); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     border-radius: 8px;
+    background: #f12711;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #f5af19, #f12711);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #f5af19, #f12711); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     /* width: 50vw;
     height: 350px; */
   }
@@ -46,13 +53,24 @@ header {
 }
 
 #high-scores-page {
-    border: solid red;
-    /* width: 300px; */
+    border: solid #dd3e54;  /* fallback for old browsers */
+    border: solid -webkit-linear-gradient(to right, #6be585, #dd3e54);  /* Chrome 10-25, Safari 5.1-6 */
+    border: solid linear-gradient(to right, #6be585, #dd3e54); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: #f12711;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #f5af19, #f12711);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #f5af19, #f12711); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
     font-size: 16px;
     height: 30px;
 }
 #start-btn {
-    border: solid green;
+    border: solid #3CA55C;  /* fallback for old browsers */
+    border: solid -webkit-linear-gradient(to bottom, #B5AC49, #3CA55C);  /* Chrome 10-25, Safari 5.1-6 */
+    border: solid linear-gradient(to bottom, #B5AC49, #3CA55C); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: #DCE35B;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #45B649, #DCE35B);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #45B649, #DCE35B); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
     font-size: 16px;
     height: 30px;
 }
