@@ -79,7 +79,7 @@ function finishQuiz() {
     }
 }
 
-function renderHighScores() {
+function showScores() {
     // var highScores = [];
     var initials = userInitialsEl.value.trim();
     var user = {
@@ -101,7 +101,7 @@ function renderHighScores() {
 
   localStorage.setItem("score", JSON.stringify(highScores));
 }
-submitBtn.addEventListener("click", renderHighScores);
+
 
 function renderNextQuestion() {
     questionsIndex++;
@@ -129,19 +129,22 @@ function checkAnswer(event) {
     }
     setTimeout(renderNextQuestion, 500);
 }
-choicesListEl.addEventListener("click", checkAnswer);
+
 
 function showHighScores () {
     highScoreDiv.classList.remove("hide");
     for (var i = 0; i < highScores.length; i++) {
         var liEl = document.createElement("li");
-        liEl.textContent= JSON.stringify(highScores[i]);
+        console.log(typeof highScores);
+        console.log(highScores);
+
+        liEl.textContent= "User: " + highScores[i].initials + " " + "Score: " +  highScores[i].score;
         scoresList.append(liEl);
         console.log(scoresList);
         // console.log(highScores.initials);
     }
 }
-highScoresPage.addEventListener("click", showHighScores);
+
 
 function startQuiz() {
     time = 90;
@@ -162,7 +165,12 @@ function startQuiz() {
     highScoreDiv.classList.add("hide");
     renderQuestion();    
 }
+
+
 startBtn.addEventListener("click", startQuiz);
+submitBtn.addEventListener("click", showScores);
+highScoresPage.addEventListener("click", showHighScores);
+choicesListEl.addEventListener("click", checkAnswer);
 
 
 
