@@ -24,3 +24,7 @@ https://clogerie92.github.io/CodeQuiz/
 ## Mock-Up
 
 ![A user clicks through an interactive coding quiz, then enters initials to save the high score.](./images/quiz.png)
+
+## Contributer
+Carl Logerie
+Contact: carl.logerie92@gmail.com
