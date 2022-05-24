@@ -65,7 +65,7 @@ header {
 }
 
 #scores-list{
-    text-decoration: none;
+    list-style-type: none;
 }
 
 #start-btn {
