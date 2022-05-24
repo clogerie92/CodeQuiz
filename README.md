@@ -24,4 +24,4 @@ https://clogerie92.github.io/Portfolio-Site/
 ## Mock-Up
 
 The following animation demonstrates the application functionality:
-(./images/)
+(./images/quiz.png)
