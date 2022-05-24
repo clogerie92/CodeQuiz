@@ -137,6 +137,8 @@ function showHighScores () {
         var liEl = document.createElement("li");
         liEl.textContent= JSON.stringify(highScores[i]);
         scoresList.append(liEl);
+        console.log(scoresList);
+        // console.log(highScores.initials);
     }
 }
 highScoresPage.addEventListener("click", showHighScores);
