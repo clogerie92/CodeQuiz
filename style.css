@@ -63,6 +63,11 @@ header {
     font-size: 16px;
     height: 30px;
 }
+
+#scores-list{
+    text-decoration: none;
+}
+
 #start-btn {
     border: solid #3CA55C;  /* fallback for old browsers */
     border: solid -webkit-linear-gradient(to bottom, #B5AC49, #3CA55C);  /* Chrome 10-25, Safari 5.1-6 */
