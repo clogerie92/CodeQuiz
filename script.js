@@ -1,3 +1,4 @@
+// global variables
 var highScores = JSON.parse(localStorage.getItem("score")) || [];
 var startBtn = document.getElementById("start-btn");
 var timerEl = document.getElementById("timer");
@@ -45,108 +46,8 @@ var questions = [
     },
    ];
 
-   function endQuiz() {
-    clearInterval(timeInterval);
-    timerEl.textContent = "";
-    // highScoreEl.textContent = "Quiz finished! You scored: " + userScore + "points!";
-    console.log(userScore);
-    // renderHighScores();
-    questionsDiv.classList.add("hide");
-    userScoreDiv.classList.remove("hide");
-    
-}
-   
-function renderQuestion() {
-    if (time === 0) {
-        endQuiz();
-    }
-    questionsEl.textContent = questions[questionsIndex].question;
-    choicesListEl.textContent = "";
-    questionResultEl.textContent = "";
-
-    var choices = questions[questionsIndex].choices;
-
-    for (var i = 0; i < choices.length; i++) {
-        var choicesList = document.createElement("li");
-        choicesList.textContent = choices[i];
-        choicesListEl.append(choicesList);
-    }
-}
-
-function finishQuiz() {
-    if (time === 0) {
-        endQuiz();
-    }
-}
-
-function showScores() {
-    // var highScores = [];
-    var initials = userInitialsEl.value.trim();
-    var user = {
-        initials: initials,
-        score: userScore
-    }
-    // var userInitials = user.initials;
-    // var userScore = user.score;
-
-    userScoreEl.textContent = user.initials + " you scored " + user.score + " points.";
-
-    
-   console.log(highScores);
-
-       highScores.push(user);
-       highScores.sort(function(a, b) {
-           return b.score - a.score;
-       });
-
-  localStorage.setItem("score", JSON.stringify(highScores));
-}
-
-
-function renderNextQuestion() {
-    questionsIndex++;
-    console.log(questionsIndex);
-    if (questionsIndex >= questions.length) {
-        endQuiz();
-    } else {
-        renderQuestion();
-    }
-}
-
-function checkAnswer(event) {
-    // clearInterval(timeInterval);
-
-    var target = event.target;
-    if (target.matches("li")) {
-        var usersAnswer = target.textContent;
-        if (usersAnswer === questions[questionsIndex].answer) {
-            questionResultEl.textContent = "Correct!";
-            userScore++;
-        } else {
-            questionResultEl.textContent = "Wrong!";
-            time-=2;
-        }
-    }
-    setTimeout(renderNextQuestion, 500);
-}
-
-
-function showHighScores () {
-    highScoreDiv.classList.remove("hide");
-    for (var i = 0; i < highScores.length; i++) {
-        var liEl = document.createElement("li");
-        console.log(typeof highScores);
-        console.log(highScores);
-
-        liEl.textContent= "User: " + highScores[i].initials + " " + "Score: " +  highScores[i].score;
-        scoresList.append(liEl);
-        console.log(scoresList);
-        // console.log(highScores.initials);
-    }
-}
-
-
-function startQuiz() {
+   // function to start the quiz
+   function startQuiz() {
     time = 90;
     questionsIndex = 0;
     userScore = 0;
@@ -166,9 +67,115 @@ function startQuiz() {
     renderQuestion();    
 }
 
+// function to render questions to the screen
+function renderQuestion() {
+    if (time === 0) {
+        endQuiz();
+    }
+    questionsEl.textContent = questions[questionsIndex].question;
+    choicesListEl.textContent = "";
+    questionResultEl.textContent = "";
+
+    var choices = questions[questionsIndex].choices;
+
+    for (var i = 0; i < choices.length; i++) {
+        var choicesList = document.createElement("li");
+        choicesList.textContent = choices[i];
+        choicesListEl.append(choicesList);
+    }
+}
+
+// function to check the answer
+function checkAnswer(event) {
+    var target = event.target;
+    if (target.matches("li")) {
+        var usersAnswer = target.textContent;
+        if (usersAnswer === questions[questionsIndex].answer) {
+            questionResultEl.textContent = "Correct!";
+            userScore++;
+        } else {
+            questionResultEl.textContent = "Wrong!";
+            time-=2;
+        }
+    }
+    setTimeout(renderNextQuestion, 500);
+}
+
+// function to render the next question
+function renderNextQuestion() {
+    questionsIndex++;
+    console.log(questionsIndex);
+    if (questionsIndex >= questions.length) {
+        endQuiz();
+    } else {
+        renderQuestion();
+    }
+}
+
+// function to render the user's score
+function showUserScore() {
+    var initials = userInitialsEl.value.trim();
+    // user object
+    var user = {
+        initials: initials,
+        score: userScore
+    }
+    userScoreEl.textContent = user.initials + " you scored " + user.score + " points.";
+    
+   console.log(highScores);
+       // sorts scores 
+       highScores.push(user);
+       highScores.sort(function(a, b) {
+           return b.score - a.score;
+       });
+  localStorage.setItem("score", JSON.stringify(highScores));
+}
+
+// function to render all the users and their scores
+function showHighScores () {
+    highScoreDiv.classList.remove("hide");
+    for (var i = 0; i < highScores.length; i++) {
+        var liEl = document.createElement("li");
+        console.log(typeof highScores);
+        console.log(highScores);
+
+        liEl.textContent= "User: " + highScores[i].initials + " " + "Score: " +  highScores[i].score;
+        scoresList.append(liEl);
+        console.log(scoresList);
+    }
+}
+
+   // function to stop the quiz
+function endQuiz() {
+    clearInterval(timeInterval);
+    timerEl.textContent = "";
+    // highScoreEl.textContent = "Quiz finished! You scored: " + userScore + "points!";
+    console.log(userScore);
+    // renderHighScores();
+    questionsDiv.classList.add("hide");
+    userScoreDiv.classList.remove("hide");    
+}
+
+// function finishQuiz() {
+//     if (time === 0) {
+//         endQuiz();
+//     }
+// }
+
+
+
+
+
+
+
+
+
+
+
+
 
 startBtn.addEventListener("click", startQuiz);
-submitBtn.addEventListener("click", showScores);
+submitBtn.addEventListener("click", showUserScore);
 highScoresPage.addEventListener("click", showHighScores);
 choicesListEl.addEventListener("click", checkAnswer);
 
