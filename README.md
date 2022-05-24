@@ -19,9 +19,8 @@ The user can also view all their scores by clicking the view high scores button
 ```
 
 # GitHub Pages:
-https://clogerie92.github.io/Portfolio-Site/
+https://clogerie92.github.io/CodeQuiz/
 
 ## Mock-Up
 
-The following animation demonstrates the application functionality:
-(./images/quiz.png)
+![A user clicks through an interactive coding quiz, then enters initials to save the high score.](./images/quiz.png)
